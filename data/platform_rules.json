@@ -1,0 +1,31 @@
+{
+  "platform_name": "Marketplace Basic Rules",
+  "title_rules": {
+    "max_length": 120,
+    "min_length": 20,
+    "avoid_repeated_words": true,
+    "avoid_excessive_generic_words": true,
+    "required_attributes_by_category": {
+      "water bottle": ["brand", "size", "material"],
+      "face moisturizer": ["brand", "skin type", "size"],
+      "throw pillow cover": ["material", "size", "color"]
+    }
+  },
+  "bullet_rules": {
+    "min_bullets": 3,
+    "max_bullets": 5,
+    "min_words_per_bullet": 3,
+    "avoid_empty_bullets": true,
+    "avoid_generic_bullets": true
+  },
+  "generic_words": [
+    "best",
+    "amazing",
+    "great",
+    "nice",
+    "high quality",
+    "good",
+    "perfect"
+  ],
+  "human_review_note": "Do not publish without checking that all claims are supported by the provided product attributes."
+}
