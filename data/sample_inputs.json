@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "category": "water bottle",
+    "attributes": {
+      "brand": "HydroLite",
+      "size": "24 oz",
+      "material": "stainless steel",
+      "feature": "insulated"
+    },
+    "draft_title": "Best Amazing Water Bottle for Everyday Use Gym Travel Strong Durable Bottle",
+    "draft_bullets": [
+      "Great for everyday use",
+      "Nice bottle for gym and travel",
+      "High quality design"
+    ]
+  },
+  {
+    "id": 2,
+    "category": "face moisturizer",
+    "attributes": {
+      "brand": "PureSkin",
+      "skin type": "sensitive skin",
+      "size": "50 ml",
+      "feature": "fragrance-free"
+    },
+    "draft_title": "Hydrating Cream for Women and Men 50ml",
+    "draft_bullets": [
+      "Good cream for face",
+      "Works well",
+      "Nice texture"
+    ]
+  },
+  {
+    "id": 3,
+    "category": "throw pillow cover",
+    "attributes": {
+      "material": "linen blend",
+      "size": "18 x 18 inch",
+      "color": "navy blue",
+      "feature": "hidden zipper"
+    },
+    "draft_title": "Soft Decorative Pillow Cover Blue 18x18",
+    "draft_bullets": [
+      "Nice for home",
+      "Soft and beautiful",
+      "Easy to use"
+    ]
+  }
+]
