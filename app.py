@@ -266,7 +266,8 @@ with col2:
     )
 
 st.subheader("Platform rule set")
-st.json(rules)
+with st.expander("View platform rules"):
+    st.json(rules)
 
 if st.button("Run rule-based check"):
     attributes = parse_attributes_text(attributes_text)
