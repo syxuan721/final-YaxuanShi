@@ -88,6 +88,15 @@ def attribute_covered(attr_value: str, combined_text: str) -> bool:
     return attr_value.lower() in combined_text.lower()
 
 
+def remove_generic_words(text: str, generic_words: list[str]) -> str:
+    cleaned = text
+    for word in generic_words:
+        pattern = re.compile(re.escape(word), re.IGNORECASE)
+        cleaned = pattern.sub("", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned
+
+
 # ----------------------------
 # Rule checks
 # ----------------------------
@@ -189,6 +198,66 @@ def run_checks(category: str, attributes: dict, title: str, bullets: list[str], 
 
 
 # ----------------------------
+# Mock rewrite
+# ----------------------------
+def generate_mock_rewrite(category: str, attributes: dict, title: str, bullets: list[str], rules: dict):
+    generic_words = rules["generic_words"]
+
+    # Clean title
+    cleaned_title = remove_generic_words(title, generic_words)
+
+    # Remove repeated words in title while keeping order
+    seen = set()
+    title_tokens = cleaned_title.split()
+    deduped_tokens = []
+    for token in title_tokens:
+        token_lower = token.lower()
+        if token_lower not in seen:
+            deduped_tokens.append(token)
+            seen.add(token_lower)
+
+    revised_title = " ".join(deduped_tokens).strip()
+
+    # Add useful required attributes if missing
+    category_required = rules["title_rules"]["required_attributes_by_category"].get(category.lower(), [])
+    title_lower = revised_title.lower()
+
+    missing_title_parts = []
+    for attr_name in category_required:
+        attr_value = attributes.get(attr_name, "")
+        if attr_value and str(attr_value).lower() not in title_lower:
+            missing_title_parts.append(str(attr_value))
+
+    if missing_title_parts:
+        revised_title = f"{revised_title} {' '.join(missing_title_parts)}".strip()
+
+    # Build revised bullets from attributes
+    revised_bullets = []
+    for key, value in attributes.items():
+        revised_bullets.append(f"{key.title()}: {value}")
+
+    # Keep within bullet limit
+    max_bullets = rules["bullet_rules"]["max_bullets"]
+    revised_bullets = revised_bullets[:max_bullets]
+
+    # If too few bullets, keep some cleaned originals
+    min_bullets = rules["bullet_rules"]["min_bullets"]
+    if len(revised_bullets) < min_bullets:
+        for bullet in bullets:
+            bullet_clean = remove_generic_words(bullet, generic_words)
+            bullet_clean = re.sub(r"\s+", " ", bullet_clean).strip()
+            if bullet_clean and bullet_clean not in revised_bullets:
+                revised_bullets.append(bullet_clean)
+            if len(revised_bullets) >= min_bullets:
+                break
+
+    return {
+        "revised_title": revised_title,
+        "revised_bullets": revised_bullets
+    }
+
+
+# ----------------------------
 # UI helpers
 # ----------------------------
 def sample_label(sample: dict) -> str:
@@ -281,6 +350,14 @@ if st.button("Run rule-based check"):
         rules=rules,
     )
 
+    mock_rewrite = generate_mock_rewrite(
+        category=category,
+        attributes=attributes,
+        title=draft_title,
+        bullets=bullets,
+        rules=rules,
+    )
+
     st.subheader("Results")
 
     st.markdown("### Compliance summary")
@@ -310,3 +387,10 @@ if st.button("Run rule-based check"):
 
     st.markdown("### Human review note")
     st.info(rules["human_review_note"])
+
+    st.markdown("### Suggested revised title")
+    st.write(mock_rewrite["revised_title"])
+
+    st.markdown("### Suggested revised bullet points")
+    for bullet in mock_rewrite["revised_bullets"]:
+        st.write(f"- {bullet}")
