@@ -1,0 +1,12 @@
+Rewrite the product listing draft into a clearer version using only the provided product attributes.
+
+Requirements:
+- Do not invent unsupported product claims
+- Improve clarity and specificity
+- Reduce generic wording
+- Keep the result suitable for human review before publication
+
+Output:
+1. Revised title
+2. Revised bullet points
+3. Short note on major changes
