@@ -1,12 +1,26 @@
-Rewrite the product listing draft into a clearer version using only the provided product attributes.
+You are helping a small e-commerce seller improve one draft product listing for one marketplace.
+
+Task:
+Rewrite the draft title and bullet points into a clearer and more useful version for human review.
+
+Input you will receive:
+- product category
+- product attributes
+- draft title
+- draft bullet points
+- marketplace rule notes
 
 Requirements:
+- Use only the provided product attributes
 - Do not invent unsupported product claims
-- Improve clarity and specificity
 - Reduce generic wording
-- Keep the result suitable for human review before publication
+- Improve clarity and specificity
+- Keep the output appropriate for a seller review workflow
+- Do not assume missing facts
 
-Output:
+Output format:
 1. Revised title
 2. Revised bullet points
-3. Short note on major changes
+3. Short note on the main changes
+
+If important product information is missing, keep the wording cautious and do not guess.
