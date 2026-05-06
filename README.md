@@ -42,25 +42,37 @@ This project uses two course concepts:
 The baseline is the current manual process: checklist-based review and manual rewriting.
 
 ## 3. Evaluation and results
-The project is evaluated on a small set of sample listings across a few simple product categories.
+The project is evaluated on a small set of sample listings across three simple product categories:
+- water bottles
+- face moisturizers
+- throw pillow covers
 
-I compare the app against the manual baseline on four dimensions:
+The current test set includes 12 sample cases. Each case contains structured product attributes, a draft title, draft bullet points, and expected main issues.
+
+The app is compared against the manual baseline on four dimensions:
 - rule compliance accuracy
 - rewrite quality
 - information preservation
 - time saved
 
-In general, the app works best when the input attributes are clear and complete. It is useful for spotting generic wording and producing cleaner rewrites. Its main weakness is that it can become too generic when the input information is limited.
+At the current stage, the strongest part of the system is the rule-based check. It is already useful for identifying generic wording, repeated wording, missing required attributes, and weak bullet points. The suggested rewrite is still a lightweight prototype. It improves structure and attribute coverage, but it does not yet produce fully natural marketplace-ready copy. Because of that, the tool is more reliable as a review aid than as a final publishing system.
 
 ## 4. Artifact snapshot
 The repository includes:
 - the Streamlit app
-- prompt files
 - platform rules and sample inputs
 - evaluation files
-- screenshots or sample outputs
+- screenshots of the app interface and outputs
 
-The app interface includes a simple input form and a structured results page. The output shows compliance issues, missing information, a rewritten title, rewritten bullet points, and a human review note.
+At this stage, the app supports the core workflow from input to output:
+1. the user loads or enters a draft listing
+2. the app checks rule and completeness issues
+3. the app returns structured review results
+4. the app provides a first-pass revised title and revised bullet points
+
+Example screenshots are included in the `screenshots/` folder:
+- `app_input.png`: input form and sample loading
+- `app_output.png`: rule-check results and suggested revisions
 
 ## 5. Setup and usage
 Install dependencies:
@@ -70,7 +82,7 @@ pip install -r requirements.txt
 ```
 Run the app:
 ```bash
-streamlit run app.py
+python -m streamlit run app.py
 ```
 How to use:
 - Open the app in the browser
