@@ -23,17 +23,17 @@ I built a small Streamlit app. The user enters:
 The app then returns:
 - a compliance summary
 - weak or missing information
-- a rewritten title
-- rewritten bullet points
+- a revised title
+- revised bullet points
 - a short human review note
 
-The system works in two stages:
+### The system works in two stages.
 
-**Stage 1: Rule and completeness check**  
-This stage handles more deterministic parts of the workflow, such as missing attributes, repeated wording, vague language, or simple formatting issues.
+### Stage 1: Rule and completeness check
+This stage handles deterministic parts of the workflow, such as missing attributes, repeated wording, vague language, and simple formatting issues.
 
-**Stage 2: Model-based rewrite**  
-The model rewrites the title and bullet points into a cleaner version and explains the main changes.
+### Stage 2: Model-based rewrite
+This stage produces a first-pass revised version of the title and bullet points for human review.
 
 This project uses two course concepts:
 - **Structured output**: the app always returns the same output sections
@@ -57,6 +57,12 @@ The app is compared against the manual baseline on four dimensions:
 
 At the current stage, the strongest part of the system is the rule-based check. It is already useful for identifying generic wording, repeated wording, missing required attributes, and weak bullet points. The suggested rewrite is still a lightweight prototype. It improves structure and attribute coverage, but it does not yet produce fully natural marketplace-ready copy. Because of that, the tool is more reliable as a review aid than as a final publishing system.
 
+### What worked
+The strongest part of the current system is issue detection. The rule-based check is already useful for identifying generic wording, repeated wording, missing required attributes, and weak bullet points. The app also helps structure the workflow by giving the user a first-pass revised version for review.
+
+### Current limits
+The rewrite output is still a lightweight prototype, so it does not always produce natural marketplace-ready copy. Output quality drops when the product attributes are incomplete, and the platform rules used in this project are simplified rather than full real-world marketplace policies.
+
 ## 4. Artifact snapshot
 The repository includes:
 - the Streamlit app
@@ -75,15 +81,18 @@ Example screenshots are included in the `screenshots/` folder:
 - `app_output.png`: rule-check results and suggested revisions
 
 ## 5. Setup and usage
+
 Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 Run the app:
+
 ```bash
 python -m streamlit run app.py
 ```
+
 How to use:
 - Open the app in the browser
 - Enter a product category
@@ -93,6 +102,7 @@ How to use:
 - Submit and review the output
 
 ## 6. Human review boundary
+
 This system is a listing preparation aid, not an automatic publishing tool. The final output should always be reviewed by a human before publication.
 
 The system should not be fully trusted when the input is incomplete or when the rule set is unclear. To reduce that risk, the app is designed to rely on user-provided product facts and to flag missing information instead of guessing.
