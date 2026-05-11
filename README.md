@@ -101,6 +101,9 @@ How to use:
 - Select a platform rule set
 - Submit and review the output
 
+### Example
+For a quick demo, load the sample case “Sample 1: water bottle” in the app. Then click Run rule-based check. The app will return a compliance summary, missing information, weak points, and a suggested revised title and bullet points.
+
 ## 6. Human review boundary
 
 This system is a listing preparation aid, not an automatic publishing tool. The final output should always be reviewed by a human before publication.
